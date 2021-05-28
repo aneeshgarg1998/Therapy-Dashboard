@@ -1,0 +1,15 @@
+version: "3"
+services:
+
+  db:
+    image: mysql:5.7
+    restart: always
+    container_name: td_mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: "root"
+      MYSQL_HOST: localhost
+      MYSQL_DATABASE: "services"
+    ports:
+      - "3307:3306"
+    volumes:
+      - "./mysql:/var/lib/mysql"

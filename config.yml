@@ -1,0 +1,49 @@
+logging:
+  level: INFO
+
+  appenders:
+    - type: console
+      threshold: ALL
+      timeZone: IST
+
+server:
+  type: simple
+  applicationContextPath: /
+  adminContextPath: /admin
+  connector:
+    port: 8080
+    type: http
+
+
+appName : TheraPlanner
+
+
+## Database settings.
+#database:
+#
+#  # the name of your JDBC driver
+#  driverClass: com.mysql.jdbc.Driver
+#
+#  # the username
+#  user: root
+#
+#  # the password
+#  password: root
+#
+#  # the JDBC URL
+#  url: jdbc:mysql://localhost:3307/services?autoReconnect=true&user=root&password=root
+
+# Database settings.
+database:
+  driverClass: com.mysql.cj.jdbc.Driver
+  url: jdbc:mysql://localhost:3307/services?autoReconnect=true&user=root&password=root
+  user: root
+  password: root
+  validationQuery: "SELECT 1"
+  validationQueryTimeout: 3s
+  minSize: 8
+  maxSize: 32
+  checkConnectionWhileIdle: false
+  evictionInterval: 10s
+  minIdleTime: 1 minute
+  checkConnectionOnBorrow: true
