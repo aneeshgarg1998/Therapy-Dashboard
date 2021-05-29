@@ -1,14 +1,16 @@
 package com.hackon.trap.core;
 
+import com.hackon.trap.core.resources.AuthResources;
+import com.hackon.trap.core.resources.ClientResources;
+import com.hackon.trap.core.resources.MeetingResources;
 import com.hackon.trap.core.resources.TestResources;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
-import org.skife.jdbi.v2.DBI;
+import org.jdbi.v3.core.Jdbi;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.sql.DataSource;
 
 public class TraPApplication extends Application<TraPConfig> {
 
@@ -26,14 +28,14 @@ public class TraPApplication extends Application<TraPConfig> {
     @Override
     public void run(TraPConfig configuration, Environment environment) throws Exception {
         logger.info("Registering RESTful API resources");
-        logger.info("App: %s", configuration.getAppName());
 
-        final DataSource dataSource = configuration.getDataSourceFactory().build(environment.metrics(), "sql");
-        DBI dbi = new DBI(dataSource);
-
-        environment.healthChecks().register("MySQL DB Health Check", new MySQLHealthCheckResource(dbi));
+        Jdbi jdbi = Jdbi.create(configuration.getDataSourceFactory().getUrl());
+        environment.healthChecks().register("MySQL DB Health Check", new MySQLHealthCheckResource(jdbi));
         environment.healthChecks().register("TraPHealthCheck", new TraPHealthCheckResource(configuration));
 
         environment.jersey().register(new TestResources());
+        environment.jersey().register(new AuthResources(jdbi));
+        environment.jersey().register(new MeetingResources(jdbi));
+        environment.jersey().register(new ClientResources(jdbi));
     }
 }
