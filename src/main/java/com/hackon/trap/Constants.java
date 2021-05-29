@@ -21,4 +21,5 @@ public class Constants {
     public static final String FIELD_TODO = "TODO";
     public static final String FIELD_DURATION = "DURATION";
     public static final String FIELD_NOTES = "NOTES";
+    public static final String FIELD_CLIENT_NAME = "CLIENT_NAME";
 }

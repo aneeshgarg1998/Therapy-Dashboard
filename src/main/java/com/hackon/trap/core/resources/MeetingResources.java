@@ -47,8 +47,9 @@ public class MeetingResources {
                 .toDo(meetingScheduleDTO.getToDo())
                 .duration(meetingScheduleDTO.getDuration())
                 .when(meetingScheduleDTO.getWhen())
+                .clientName(meetingScheduleDTO.getClientName())
                 .build());
-        return Response.ok().build();
+        return Response.ok("Meeting scheduled successfully!").build();
 
     }
 

@@ -22,14 +22,15 @@ public class MeetingScheduleDAOImpl implements MeetingScheduleDAO{
     @Override
     public void addMeetingSchedule(MeetingSchedule meetingSchedules) {
         jdbi.useHandle(handle -> {
-            String query = "INSERT INTO `MEETING_SCHEDULES` (`THERAPIST_ID`, `CLIENT_ID`, `WHEN`, `DURATION`, `TODO`)  " +
-                    "VALUES (:therapistId, :clientId, :when, :duration, :toDo)";
+            String query = "INSERT INTO `MEETING_SCHEDULES` (`THERAPIST_ID`, `CLIENT_ID`, `WHEN`, `DURATION`, `TODO`, `CLIENT_NAME`)  " +
+                    "VALUES (:therapistId, :clientId, :when, :duration, :toDo, :clientName)";
             handle.createUpdate(query)
                     .bind("therapistId", meetingSchedules.getTherapistId())
                     .bind("clientId", meetingSchedules.getClientId())
                     .bind("when", meetingSchedules.getWhen())
                     .bind("duration", meetingSchedules.getDuration())
                     .bind("toDo", meetingSchedules.getToDo())
+                    .bind("clientName", meetingSchedules.getClientName())
                     .execute();
         });
     }
@@ -51,6 +52,7 @@ public class MeetingScheduleDAOImpl implements MeetingScheduleDAO{
                     .toDo(rs.getString(Constants.FIELD_TODO))
                     .when(rs.getString(Constants.FIELD_WHEN))
                     .duration(rs.getLong(Constants.FIELD_DURATION))
+                    .clientName(rs.getString(Constants.FIELD_CLIENT_NAME))
                     .build();
         }
     }
