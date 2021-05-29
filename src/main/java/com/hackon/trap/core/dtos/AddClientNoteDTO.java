@@ -13,6 +13,7 @@ public class AddClientNoteDTO {
     Long year;
     Long month;
     Long date;
-    String note;
+    String title;
+    String description;
 
 }

@@ -37,7 +37,7 @@ public class MeetingScheduleDAOImpl implements MeetingScheduleDAO{
 
     @Override
     public List<MeetingSchedule> getMeetingSchedules(Long therapistId) {
-        return jdbi.withHandle(handle -> handle.createQuery("SELECT * FROM `MEETING_SCHEDULES` WHERE THERAPIST_ID = :therapistId")
+        return jdbi.withHandle(handle -> handle.createQuery("SELECT * FROM `MEETING_SCHEDULES` WHERE THERAPIST_ID = :therapistId ORDER BY `WHEN`")
                 .bind("therapistId", therapistId).mapTo(MeetingSchedule.class).list());
     }
 

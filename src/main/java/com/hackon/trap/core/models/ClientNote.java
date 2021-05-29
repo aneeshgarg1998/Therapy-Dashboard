@@ -19,6 +19,7 @@ public class ClientNote {
     Long year;
     Long month;
     Long date;
-    String notes;
+    String title;
+    String description;
 
 }

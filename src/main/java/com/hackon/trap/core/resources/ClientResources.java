@@ -69,7 +69,8 @@ public class ClientResources {
                 .year(addClientNoteDTO.getYear())
                 .month(addClientNoteDTO.getMonth())
                 .date(addClientNoteDTO.getDate())
-                .notes(addClientNoteDTO.getNote())
+                .title(addClientNoteDTO.getTitle())
+                .description(addClientNoteDTO.getDescription())
                 .build();
         clientNoteServices.addClientNote(clientNote);
         return Response.ok("Note added successfully!").build();

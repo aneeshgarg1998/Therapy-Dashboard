@@ -29,7 +29,8 @@ public class ClientNotesDAOImpl implements ClientNotesDAO{
                         .bind("clientId", clientNote.getClientId())
                         .bind("year", clientNote.getYear())
                         .bind("month", clientNote.getMonth())
-                        .bind("notes", clientNote.getNotes())
+                        .bind("title", clientNote.getTitle())
+                        .bind("description", clientNote.getDescription())
                         .execute();
             }
             else{
@@ -37,7 +38,8 @@ public class ClientNotesDAOImpl implements ClientNotesDAO{
                         .bind("clientId", clientNote.getClientId())
                         .bind("year", clientNote.getYear())
                         .bind("month", clientNote.getMonth())
-                        .bind("notes", clientNote.getNotes())
+                        .bind("title", clientNote.getTitle())
+                        .bind("description", clientNote.getDescription())
                         .bind("date", clientNote.getDate())
                         .execute();
             }
@@ -45,11 +47,11 @@ public class ClientNotesDAOImpl implements ClientNotesDAO{
     }
 
     private String getAddClientQuery(ClientNote clientNote){
-        String query = "INSERT INTO `CLIENT_NOTES` (`CLIENT_ID`, `YEAR`, `MONTH`, `NOTES` ";
+        String query = "INSERT INTO `CLIENT_NOTES` (`CLIENT_ID`, `YEAR`, `MONTH`, `TITLE`, `DESCRIPTION` ";
         if(clientNote.getDate() != null){
             query += ",`DATE` ";
         }
-        query += ") VALUES (:clientId, :year, :month, :notes";
+        query += ") VALUES (:clientId, :year, :month, :title, :description";
         if(clientNote.getDate() != null){
             query += ", :date ";
         }
@@ -59,7 +61,7 @@ public class ClientNotesDAOImpl implements ClientNotesDAO{
 
     @Override
     public List<ClientNote> getClientNotes(Long clientId) {
-        return jdbi.withHandle(handle -> handle.createQuery("SELECT * FROM `CLIENT_NOTES` WHERE CLIENT_ID = :clientId ORDER BY `YEAR` DESC, `MONTH`, `DATE`")
+        return jdbi.withHandle(handle -> handle.createQuery("SELECT * FROM `CLIENT_NOTES` WHERE CLIENT_ID = :clientId ORDER BY `YEAR` DESC, `MONTH` DESC, `DATE` DESC")
                 .bind("clientId", clientId).mapTo(ClientNote.class).list());
     }
 
@@ -73,7 +75,8 @@ public class ClientNotesDAOImpl implements ClientNotesDAO{
                     .year(rs.getLong(Constants.FIELD_YEAR))
                     .month(rs.getLong(Constants.FIELD_MONTH))
                     .date(rs.getLong(Constants.FIELD_DATE))
-                    .notes(rs.getString(Constants.FIELD_NOTES))
+                    .title(rs.getString(Constants.FIELD_TITLE))
+                    .description(rs.getString(Constants.FIELD_DESCRIPTION))
                     .build();
         }
     }

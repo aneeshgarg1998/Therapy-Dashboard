@@ -20,6 +20,7 @@ public class Constants {
     public static final String FIELD_BIRTH_DATE = "BIRTH_DATE";
     public static final String FIELD_TODO = "TODO";
     public static final String FIELD_DURATION = "DURATION";
-    public static final String FIELD_NOTES = "NOTES";
     public static final String FIELD_CLIENT_NAME = "CLIENT_NAME";
+    public static final String FIELD_DESCRIPTION = "DESCRIPTION";
+    public static final String FIELD_TITLE = "TITLE";
 }
