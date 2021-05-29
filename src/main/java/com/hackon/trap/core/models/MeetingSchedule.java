@@ -13,11 +13,13 @@ import org.joda.time.DateTime;
 @AllArgsConstructor
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class MeetingSchedules {
+public class MeetingSchedule {
 
     Long id;
     Long therapistId;
     Long clientId;
-    DateTime when;
+    String when;
+    Long duration;
+    String toDo;
 
 }

@@ -18,6 +18,7 @@ public class Client {
     Long therapistId;
     String firstName;
     String lastName;
+    String birthDate;
     String email;
     String contactNumber;
 
