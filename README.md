@@ -23,3 +23,9 @@
 4. Run the server with following configuration
 
 ![Configuration](Configuration.png)
+
+5. Clone the front-end git repo `https://github.com/deeox/theraplanner` and run the commands:
+   
+   `$ npm install`
+   
+   `$ Node app.js`
