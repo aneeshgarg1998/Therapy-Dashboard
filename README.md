@@ -21,3 +21,5 @@
 3. Open the project in an ide an load all the maven dependencies
 
 4. Run the server with following configuration
+
+![Configuration](Configuration.png)
